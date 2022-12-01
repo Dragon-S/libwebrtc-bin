@@ -24,11 +24,29 @@ if [ -f $WEBRTC_DIR/.gclient ]; then
     git clean -xdf;
   fi
 else
-  echo "Getting WEBRTC ...";
+  # echo "Getting WEBRTC ...";
+  echo "Create .gclient file ...";
   rm -f $DEPOT_TOOLS_DIR/metrics.cfg;
   rm -rf $WEBRTC_DIR/src;
-  fetch --nohooks $FETCH_TARGET;
+  # fetch --nohooks $FETCH_TARGET;
+  gclient root
+  gclient config --spec 'solutions = [
+    {
+      "name": "src",
+      "url": "https://github.com/Dragon-S/google-webrtc.git",
+      "deps_file": "DEPS",
+      "managed": False,
+      "custom_deps": {},
+    },
+  ]
+  '
+
+  echo "Getting WEBRTC ...";
+  gclient sync --nohooks --with_branch_heads
 fi
+
+echo "Switch WEBRTC to WEBRTC_COMMIT = $WEBRTC_COMMIT";
+
 cd $WEBRTC_DIR/src
 git fetch
 git checkout -f $WEBRTC_COMMIT
