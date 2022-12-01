@@ -26,14 +26,15 @@ package:
 	cd $(BUILD_DIR) && \
 	zip -9 -r $(PACKAGE_DIR)/$(subst $(space),,$(PACKAGE_NAME)).zip WebRTC.xcframework/*
 
-.PHONY: patch
-patch: common-patch
-	echo "apply iOS patches ..." && \
-	cd $(SRC_DIR) && \
-	patch -p2 < $(PATCH_DIR)/macos_h264_encoder.patch
+# .PHONY: patch
+# patch: common-patch
+# 	echo "apply iOS patches ..." && \
+# 	cd $(SRC_DIR) && \
+# 	patch -p2 < $(PATCH_DIR)/macos_h264_encoder.patch
 
 .PHONY: build
-build: patch
+# build: patch
+build:
 	cd $(SRC_DIR)/tools_webrtc/ios && \
 	python3 build_ios_libs.py -o $(BUILD_DIR) --build_config release --extra-gn-args '$(EXTRA_GN_ARGS) $(CC_WRAPPER)'
 

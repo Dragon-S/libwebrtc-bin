@@ -43,13 +43,13 @@ ifneq (x$(TARGET_CPU),x)
 	$(WEBRTC_DIR)/src/build/linux/sysroot_scripts/install-sysroot.py --arch=$(TARGET_CPU)
 endif
 
-.PHONY: common-patch
-common-patch:
-	echo "apply patches ..." && \
-	cd $(SRC_DIR) && \
-	patch -p1 < $(PATCH_DIR)/nacl_armv6_2.patch && \
-	patch -p2 < $(PATCH_DIR)/4k.patch && \
-	patch -p2 < $(PATCH_DIR)/add_licenses.patch
+# .PHONY: common-patch
+# common-patch:
+# 	echo "apply patches ..." && \
+# 	cd $(SRC_DIR) && \
+# 	patch -p1 < $(PATCH_DIR)/nacl_armv6_2.patch && \
+# 	patch -p2 < $(PATCH_DIR)/4k.patch && \
+# 	patch -p2 < $(PATCH_DIR)/add_licenses.patch
 
 .PHONY: common-package
 common-package: copy

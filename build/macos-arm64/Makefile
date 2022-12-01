@@ -46,13 +46,14 @@ copy: common-copy
 	  -debug-symbols $(BUILD_DIR)/WebRTC.dSYM \
 	  -output $(PACKAGE_DIR)/Frameworks/WebRTC.xcframework
 
-.PHONY: patch
-patch: common-patch
-	cd $(SRC_DIR) && \
-	patch -p2 < $(PATCH_DIR)/macos_h264_encoder.patch
+# .PHONY: patch
+# patch: common-patch
+# 	cd $(SRC_DIR) && \
+# 	patch -p2 < $(PATCH_DIR)/macos_h264_encoder.patch
 
 .PHONY: build
-build: patch
+# build: patch
+build:
 	cd $(SRC_DIR) && \
 	gn gen $(BUILD_DIR) --args='$(EXTRA_GN_ARGS) $(CC_WRAPPER)' && \
 	ninja -C $(BUILD_DIR) && \
