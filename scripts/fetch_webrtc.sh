@@ -39,6 +39,7 @@ else
       "custom_deps": {},
     },
   ]
+target_os = ["'$FETCH_TARGET'"]
   '
 
   echo "Getting WEBRTC ...";
